@@ -18,6 +18,9 @@ uplloc="/path/to/jerkingupload.py"
 #Location of Template
 Template="/path/to/Template.txt"
 
+
+
+
 for i in "$@"; do
 	if [ -d "$i" ]
 		then
@@ -43,6 +46,12 @@ for i in "$@"; do
 			fi		
 	fi	
 done
+
+if [ ${#dir[@]} -lt 1 ]; then
+	echo "I need at least one folder!"
+	exit
+fi
+
 
 if [ ${#dir[@]} -gt 1 ]; then
 	echo "More than one folder, i don't know what to do?"
