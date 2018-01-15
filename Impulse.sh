@@ -33,9 +33,7 @@ for i in "$@"; do
 							texts+=( "$(cat "$i")" )
 							echo "Recognized as .txt, added to texts."
 				else
-				test2=$(identify "$i")
-				echo "$test2"
-					if [ "$test2" == "" ]
+				if [ "${i: -4}" = ".jpg" ] || [ "${i: -4}" = ".png" ]
 					then
 						echo "It looks like $i is not a directory, picture file or a text file. Aborting since DAFUQ?"
 						exit
@@ -69,7 +67,12 @@ for i in "$*"/*; do
 	if [ -d "$i" ]
 		then
 			dir+=("$i")
-			dirfind "$i"
+			if [ ${#dir[@]} -gt 200 ]; then
+				echo "More than 200 dirs, sounds like something went wrong."
+				exit
+				else
+				dirfind "$i"
+			fi
 	fi
 done
 }		
